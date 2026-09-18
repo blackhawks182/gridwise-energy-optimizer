@@ -161,6 +161,8 @@ The suite covers:
 - `/health`
 - `/optimize-energy` integration with the LLM boundary mocked
 
+Optional live paraphrase testing is in `gridwise/tests/test_live_llm.py`; it runs only when `GRIDWISE_LIVE_LLM=1` is set.
+
 The public-sample test is skipped unless you explicitly supply the organizer JSON path.
 
 ## Verify all 10 public sample cases
