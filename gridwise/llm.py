@@ -113,7 +113,7 @@ PROVIDER_DEFAULTS: dict[str, dict[str, str]] = {
     },
 }
 
-DEFAULT_PROVIDER_ORDER = "gemini,groq,openrouter,deepseek"
+DEFAULT_PROVIDER_ORDER = "groq,gemini,openrouter,deepseek"
 
 
 def _read_positive_int(name: str, default: int, minimum: int, maximum: int) -> int:
@@ -239,6 +239,11 @@ def _call_provider(provider: str, operator_notes: list[str]) -> dict[str, Any]:
     if provider == "groq" and model.startswith("openai/"):
         kwargs["reasoning_effort"] = os.getenv("GROQ_REASONING_EFFORT", "low")
         kwargs["reasoning_format"] = "hidden"
+
+    if provider == "gemini" and model.startswith("gemini-3"):
+        # Gemini 3 reasoning cannot be turned off. Low reasoning keeps this
+        # classification task fast while retaining model reasoning.
+        kwargs["reasoning_effort"] = os.getenv("GEMINI_REASONING_EFFORT", "low")
 
     if provider == "deepseek":
         thinking_enabled = os.getenv("DEEPSEEK_THINKING", "false").strip().lower() == "true"

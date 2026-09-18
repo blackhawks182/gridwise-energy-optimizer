@@ -13,7 +13,7 @@ from .validator import validate_directives, validate_schedule
 
 app = FastAPI(
     title="GridWise Energy Optimizer",
-    version="1.2.0",
+    version="1.3.0",
     description=(
         "LLM-assisted GridWise operator directive interpretation, deterministic guardrails, "
         "and 24-hour energy optimization."

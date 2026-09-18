@@ -54,40 +54,25 @@ The optimizer itself is deterministic and uses SciPy/HiGHS. The LLM is used only
 
 ## Free development setup
 
-You do **not** need a paid DeepSeek account to develop this project.
-
-The recommended free setup is to create:
+You do **not** need a paid DeepSeek account to develop this project. The recommended free-development provider is Groq, with Gemini as the next fallback if configured. The default order is:
 
 ```text
-GEMINI_API_KEY
-GROQ_API_KEY
+groq → gemini → openrouter → deepseek
 ```
 
-and let the application use:
+Groq currently documents `openai/gpt-oss-120b` at 1,000 requests/day and 30 requests/minute on its documented developer-plan table; exact account limits remain provider-controlled. Gemini 3.8 Flash is available on the Gemini API Free Tier, but Google says exact limits vary by project/model and are not guaranteed.
 
-```text
-gemini → groq → openrouter → deepseek
-```
-
-in that order.
-
-Google currently provides a Gemini API Free Tier for eligible models, and Google AI Studio can create API keys for it. New keys created in AI Studio are auth keys under Google's current 2026 key changes. Check your AI Studio quota dashboard for the exact limits assigned to your project/model. 
-
-Groq currently has a Free tier as well. Its exact model/account rate limits are shown in the Groq Limits page; limits are measured in requests/minute, requests/day, and token quotas, and differ by model/account.
-
-OpenRouter is included only as another fallback/development option. Its current Free plan has a platform limit of 50 requests/day, so it should not be your only provider for a repeatedly-called judge endpoint.
-
-DeepSeek remains supported for teams that have DeepSeek API balance or granted credits.
+OpenRouter is retained as another fallback/development option; its free router provides zero-cost inference, but the provider itself can impose changing free-tier limits.
 
 Official provider pages:
 
 - Google AI Studio: https://aistudio.google.com/
 - Gemini API key guide: https://ai.google.dev/gemini-api/docs/api-key
-- Gemini billing/free tier: https://ai.google.dev/gemini-api/docs/billing
-- Groq: https://console.groq.com/
+- Gemini rate limits: https://ai.google.dev/gemini-api/docs/rate-limits
+- Groq API keys: https://console.groq.com/keys
 - Groq limits: https://console.groq.com/docs/rate-limits
 - OpenRouter keys: https://openrouter.ai/keys
-- OpenRouter pricing: https://openrouter.ai/pricing
+- OpenRouter free models: https://openrouter.ai/collections/free-models
 - DeepSeek API docs: https://api-docs.deepseek.com/
 
 ## Environment configuration
