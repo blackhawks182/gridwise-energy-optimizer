@@ -5,7 +5,7 @@ import types
 
 import pytest
 
-import llm
+from gridwise import llm
 
 
 VALID_PAYLOAD = {

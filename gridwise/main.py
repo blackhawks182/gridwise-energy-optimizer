@@ -5,10 +5,10 @@ import os
 import uvicorn
 from fastapi import FastAPI, HTTPException
 
-from llm import LLMError, interpret_operator_notes
-from models import HealthResponse, OptimizeRequest, OptimizeResponse
-from optimizer import calculate_totals, format_hourly_plan, optimize_energy
-from validator import validate_directives, validate_schedule
+from .llm import LLMError, interpret_operator_notes
+from .models import HealthResponse, OptimizeRequest, OptimizeResponse
+from .optimizer import calculate_totals, format_hourly_plan, optimize_energy
+from .validator import validate_directives, validate_schedule
 
 
 app = FastAPI(
@@ -104,6 +104,10 @@ def optimize_energy_endpoint(request: OptimizeRequest) -> OptimizeResponse:
         ) from exc
 
 
-if __name__ == "__main__":
+def run_server() -> None:
     port = int(os.getenv("PORT", "8000"))
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
+    uvicorn.run("gridwise.main:app", host="0.0.0.0", port=port, reload=False)
+
+
+if __name__ == "__main__":
+    run_server()

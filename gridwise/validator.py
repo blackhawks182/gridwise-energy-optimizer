@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from models import (
+from .models import (
     DirectiveInterpretation,
     HourlyPlanEntry,
     LLMInterpretationEnvelope,

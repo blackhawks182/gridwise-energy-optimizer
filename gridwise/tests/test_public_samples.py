@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from models import OptimizeRequest
-from optimizer import calculate_totals, format_hourly_plan, optimize_energy
-from validator import validate_directives, validate_schedule
+from gridwise.models import OptimizeRequest
+from gridwise.optimizer import calculate_totals, format_hourly_plan, optimize_energy
+from gridwise.validator import validate_directives, validate_schedule
 
 
 PUBLIC_CASES_ENV = "GRIDWISE_PUBLIC_CASES"

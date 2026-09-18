@@ -114,24 +114,30 @@ python -c "from dotenv import load_dotenv; import os; load_dotenv(); print('Gemi
 
 ## Click-and-run in VS Code
 
-1. Open the **`gridwise` folder** in VS Code.
-2. Put at least one real provider key in `.env`.
-3. Open `main.py`.
-4. Click **Run Python File**.
+1. Open the repository root (the folder containing `pyproject.toml`) in VS Code.
+2. Put at least one real provider key in `gridwise\.env`.
+3. Open `gridwise\main.py` for inspection, or run the root `run.ps1` launcher.
+4. The canonical Python launch command is `python -m gridwise`.
 5. Open `http://127.0.0.1:8000/docs`.
 
 The service listens on port 8000 unless `PORT` is changed.
 
-## PowerShell run
+## PowerShell run from repository root
 
 ```powershell
-python main.py
+python -m gridwise
 ```
 
-Or:
+Or use the click-friendly launcher:
 
 ```powershell
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+.\run.ps1
+```
+
+For development with Uvicorn directly:
+
+```powershell
+python -m uvicorn gridwise.main:app --host 0.0.0.0 --port 8000
 ```
 
 ## Health check
@@ -311,13 +317,13 @@ The service does not log API keys or raw prompts.
 Build:
 
 ```powershell
-docker build -t gridwise-energy-optimizer .
+docker build -t gridwise-energy-optimizer .\gridwise
 ```
 
 Run:
 
 ```powershell
-docker run --rm -p 8000:8000 --env-file .env gridwise-energy-optimizer
+docker run --rm -p 8000:8000 --env-file gridwise/.env gridwise-energy-optimizer
 ```
 
 Then:

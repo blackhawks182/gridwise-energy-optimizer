@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-import main
+from gridwise import main
 
 
 PUBLIC_CASES_ENV = "GRIDWISE_PUBLIC_CASES"

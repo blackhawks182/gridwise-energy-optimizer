@@ -5,10 +5,10 @@ import math
 import pytest
 from fastapi.testclient import TestClient
 
-from main import app
-from models import OptimizeRequest
-from optimizer import calculate_totals, format_hourly_plan, optimize_energy
-from validator import validate_directives, validate_schedule
+from gridwise.main import app
+from gridwise.models import OptimizeRequest
+from gridwise.optimizer import calculate_totals, format_hourly_plan, optimize_energy
+from gridwise.validator import validate_directives, validate_schedule
 
 
 def make_request() -> OptimizeRequest:
@@ -310,7 +310,7 @@ def test_api_with_mocked_llm(monkeypatch):
     request = make_request()
     raw = all_five_directives()
 
-    monkeypatch.setattr("main.interpret_operator_notes", lambda notes, validator=None: raw)
+    monkeypatch.setattr("gridwise.main.interpret_operator_notes", lambda notes, validator=None: raw)
 
     client = TestClient(app)
     health = client.get("/health")
