@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.optimize import linprog
+from validator import validate_schedule
 
 
 def optimize_energy(hours, battery, directives=None):
@@ -229,6 +230,14 @@ def optimize_energy(hours, battery, directives=None):
 
     if not result.success:
         raise RuntimeError(f"Optimization failed: {result.message}")
+    validate_schedule(
+        hours,
+        battery,
+        directives,
+        result,
+    )
+
+    print("Schedule validation successful!")
 
     print("Optimization successful!")
     print("Objective value:", result.fun)
